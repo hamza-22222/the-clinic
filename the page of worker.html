@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل دخول للعمال</title>
+    <style>
+        body {
+            background-color: #f2f2f2;
+            text-align: center;
+        }
+
+        .container {
+            margin-top: 100px;
+            width: 50%;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border: 2px solid #dddddd;
+            border-radius: 10px;
+        }
+
+        .input-container {
+            margin-bottom: 20px;
+        }
+
+        input[type="password"] {
+            width: calc(100% - 10px);
+            padding: 10px;
+            border: 1px solid #dddddd;
+            border-radius: 5px;
+        }
+
+        select {
+            width: calc(100% - 10px);
+            padding: 10px;
+            border: 1px solid #dddddd;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: purple;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #800080;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>تسجيل دخول للعمال</h2>
+        <div class="input-container">
+            <input type="password" id="passwordInput" placeholder="كلمة المرور">
+        </div>
+        <div class="input-container">
+            <select id="nameSelect">
+                <option value="هاجر">هاجر</option>
+                <option value="هانم">هانم</option>
+                <option value="اية">اية</option>
+            </select>
+        </div>
+        <button onclick="register()" id="registerBtn">تسجيل الدخول كعامل</button>
+        <div id="afterRegistration" class="hidden">
+        <a href="file:///J:/with%20ai/%D8%B5%D9%81%D8%AD%D8%A9%20%D8%A7%D9%84%D8%B9%D8%A7%D9%85%D9%84%D9%88%D9%86%20%D8%A7%D9%84%D8%A3%D8%B5%D9%84%D9%8A%D8%A9.html"><button>اضغط</button></a>
+        </div>
+    </div>
+
+    <script>
+        function register() {
+            var password = document.getElementById("passwordInput").value;
+            var name = document.getElementById("nameSelect").value;
+            
+            if (password === "password123") {
+                document.getElementById("registerBtn").style.display = "none";
+                document.getElementById("afterRegistration").classList.remove("hidden");
+            } else {
+                alert("كلمة المرور غير صحيحة!");
+            }
+        }
+
+        function goToWebsite() {
+            window.location.href ="file:///C:/Users/elkhalil/Desktop/programing/%D8%B5%D9%81%D8%AD%D8%A9%20%D8%A7%D9%84%D8%B9%D8%A7%D9%85%D9%84%D9%88%D9%86%20%D8%A7%D9%84%D8%A3%D8%B5%D9%84%D9%8A%D8%A9.html"
+        }
+    </script>
+</body>
+</html>
+
+
+

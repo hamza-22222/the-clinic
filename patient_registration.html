@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 600px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 0;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .form-container input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .form-container input[type="submit"] {
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+        }
+
+        .form-container input[type="submit"]:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div id="main">
+            <button onclick="showChatOptions()">طلب تسجيل اسم</button>
+        </div>
+
+        <div id="chat-options" class="hidden">
+            <button onclick="showForm('اريد التسجيل كزائر لدكتورة مروة')">اريد التسجيل كزائر لدكتورة مروة</button>
+            <button onclick="showForm('اريد التسجيل كحالة للدكتورة مروة النجار')">اريد التسجيل كحالة للدكتورة مروة
+                النجار</button>
+            <button onclick="showForm('اريد التسجيل كزائر لدكتور هشام')">اريد التسجيل كزائر لدكتور هشام</button>
+            <button onclick="showForm('اريد التسجيل كحالة للدكتور هشام')">اريد التسجيل كحالة للدكتور هشام</button>
+        </div>
+
+        <div id="registration-form" class="hidden form-container">
+            <form id="form">
+                <input type="hidden" id="message-type" name="message-type">
+                <input type="text" id="name" name="name" placeholder="الاسم" required>
+                <input type="text" id="disease" name="disease" placeholder="المرض" required>
+                <input type="text" id="country" name="country" placeholder="البلد" required>
+                <input type="text" id="age" name="age" placeholder="السن" required>
+                <input type="submit" value="ارسال الرسالة">
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function showChatOptions() {
+            document.getElementById('main').classList.add('hidden');
+            document.getElementById('chat-options').classList.remove('hidden');
+        }
+
+        function showForm(messageType) {
+            document.getElementById('message-type').value = messageType;
+            document.getElementById('chat-options').classList.add('hidden');
+            document.getElementById('registration-form').classList.remove('hidden');
+        }
+
+        document.getElementById('form').addEventListener('submit', function (event) {
+            event.preventDefault();
+          
+            var messageType = document.getElementById('message-type').value;
+            var name = document.getElementById('name').value;
+            var disease = document.getElementById('disease').value;
+            var country = document.getElementById('country').value;
+            var age = document.getElementById('age').value;
+            var message = 'الرسالة: ' + messageType + '\nالاسم: ' + name + '\nالمرض: ' + disease + '\nالبلد: ' + country + '\nالسن: ' + age;
+
+            var registrationMessages = [];
+            if (localStorage.getItem("registrationMessages") != null) {
+
+              let  oldMessages =JSON.parse(localStorage.getItem("registrationMessages"));
+
+                registrationMessages=[message,...oldMessages]
+
+            } else {
+                registrationMessages.push(message)
+            }
+
+
+            localStorage.setItem('registrationMessages', JSON.stringify(registrationMessages));
+        });
+    </script>
+
+</body>
+
+</html>

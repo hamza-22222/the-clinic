@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صفحة تسجيل الدخول</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background-image: url('back ground.png');
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            text-align: center;
+            padding: 50px;
+            background-color: rgba(255, 255, 255, 0.8);
+            margin: 100px auto;
+            width: 50%;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .title {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        input, select, button {
+            display: block;
+            width: 80%;
+            margin: 10px auto;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .link-button {
+            background-color: rgb(255, 153, 0);
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: block;
+            margin: 10px auto;
+            padding: 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">تسجيل الدخول لسلامة المستخدمين</div>
+        <input id="username" type="text" placeholder="الاسم">
+        <input id="age" type="number" min="20" placeholder="السن">
+        <select id="gender">
+            <option value="ذكر">ذكر</option>
+            <option value="أنثى">أنثى</option>
+        </select>
+        <button onclick="login()" id="loginBtn">تسجيل الدخول</button>
+        <a id="workersLink" href="file:///J:/with%20ai/the%20page%20of%20worker.html" style="display: none;" class="link-button">أضغط للذهاب لصفحة العمال</a>
+        <a id="usersLink" href="file:///J:/with%20ai/%D8%B5%D9%81%D8%AD%D8%A9%20%D8%A7%D9%84%D8%B2%D9%88%D8%A7%D8%B1.Html" style="display: none;" class="link-button">أضغط للذهاب لصفحة الزوار</a>
+    </div>
+
+    <script>
+        function login() {
+            var username = document.getElementById('username').value;
+            var age = document.getElementById('age').value;
+            var gender = document.getElementById('gender').value;
+            
+            if (username === '' || age === '') {
+                alert('يرجى إدخال اسم المستخدم والسن');
+            } else if (age < 20) {
+                alert('يجب أن يكون العمر أكبر من 20 عامًا');
+            } else {
+                alert('مرحبا ' + username + '، مرحبا بك في عيادة د. هشام النادي');
+                document.getElementById('workersLink').style.display = 'block';
+                document.getElementById('usersLink').style.display = 'block';
+                document.getElementById('loginBtn').style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
+
+
+
+

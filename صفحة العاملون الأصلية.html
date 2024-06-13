@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تطبيق إدارة المهام</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #ffffff;
+      /* خلفية بيضاء */
+      color: #000000;
+      /* لون النص أسود */
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-bottom: 10px;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      resize: none;
+    }
+
+    .icon {
+      font-size: 24px;
+      vertical-align: middle;
+      margin-right: 5px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h1><span class="icon">📋</span> تطبيق إدارة المهام</h1>
+
+    <!-- Task Area 1 -->
+    <div id="task1" style="display:none;">
+      <h2>مهام العامل الأول</h2>
+      <textarea id="tasksTextArea1" rows="4" placeholder="أدخل مهامك هنا..."></textarea><br>
+      <input type="text" id="messageInput1" placeholder="أدخل رسالتك هنا..."><br>
+      <button onclick="saveTasksAndMessage(1)">حفظ المهام والرسالة</button>
+    </div>
+
+    <!-- Task Area 2 -->
+    <div id="task2" style="display:none;">
+      <h2>مهام العامل الثاني</h2>
+      <textarea id="tasksTextArea2" rows="4" placeholder="أدخل مهامك هنا..."></textarea><br>
+      <input type="text" id="messageInput2" placeholder="أدخل رسالتك هنا..."><br>
+      <button onclick="saveTasksAndMessage(2)">حفظ المهام والرسالة</button>
+    </div>
+
+    <!-- Task Area 3 -->
+    <div id="task3" style="display:none;">
+      <h2>مهام العامل الثالث</h2>
+      <textarea id="tasksTextArea3" rows="4" placeholder="أدخل مهامك هنا..."></textarea><br>
+      <input type="text" id="messageInput3" placeholder="أدخل رسالتك هنا..."><br>
+      <button onclick="saveTasksAndMessage(3)">حفظ المهام والرسالة</button>
+    </div>
+
+
+
+
+
+    <div style="text-align: center;">
+      <!-- Worker 1 Button -->
+      <button id="worker1Button" onclick="showTasks(1)"><span class="icon">👩‍💼</span> عامل 1</button>
+
+      <!-- Worker 2 Button -->
+      <button id="worker2Button" onclick="showTasks(2)"><span class="icon">👩‍💻</span> عامل 2</button>
+
+      <!-- Worker 3 Button -->
+      <button id="worker3Button" onclick="showTasks(3)"><span class="icon">👩‍🔧</span> عامل 3</button>
+    </div>
+
+    <div id="message-container" style="margin-top: 20px; display: none;">
+      <h2>الرسالة المسجلة</h2>
+      <ul id="registrationMessage"></ul>
+    </div>
+  </div>
+  <div class="table-container">
+    <h2>جدول الحضور</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>اليوم</th>
+          <th>هانم</th>
+          <th>اية</th>
+          <th>هاجر</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>السبت</td>
+          <td>موجود</td>
+          <td>غايب</td>
+          <td>موجود</td>
+        </tr>
+        <tr>
+          <td>الأحد</td>
+          <td>غايب</td>
+          <td>موجود</td>
+          <td>غايب</td>
+        </tr>
+        <tr>
+          <td>الاثنين</td>
+          <td>موجود</td>
+          <td>غايب</td>
+          <td>موجود</td>
+        </tr>
+        <tr>
+          <td>الثلاثاء</td>
+          <td>غايب</td>
+          <td>موجود</td>
+          <td>غايب</td>
+        </tr>
+        <tr>
+          <td>الأربعاء</td>
+          <td>موجود</td>
+          <td>غايب</td>
+          <td>موجود</td>
+        </tr>
+        <tr>
+          <td>الخميس</td>
+          <td>غايب</td>
+          <td>موجود</td>
+          <td>غايب</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <style>
+    .table-container {
+      max-width: 600px;
+      margin: 50px auto;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0 auto;
+    }
+
+    table,
+    th,
+    td {
+      border: 1px solid #ccc;
+    }
+
+    th,
+    td {
+      padding: 10px;
+      text-align: center;
+      font-size: 16px;
+    }
+
+    th {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    td {
+      background-color: f9f9;
+    }
+
+    tbody tr:nth-child(odd) td {
+      background-color: #f1f1f1;
+    }
+  </style>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Load saved tasks from localStorage
+      for (var i = 1; i <= 3; i++) {
+        var savedTasks = localStorage.getItem("tasks" + i);
+        if (savedTasks) {
+          document.getElementById("tasksTextArea" + i).value = savedTasks;
+          document.getElementById("worker" + i + "Button").innerHTML = '<span class="icon">📝</span> مهام ' + i;
+        }
+      }
+
+      // Load registration message from localStorage
+      var registrationMessages = JSON.parse(localStorage.getItem("registrationMessages"));
+
+
+      if (registrationMessages) {
+        var ul = document.getElementById("registrationMessage");
+        for (var i = 0; i < registrationMessages.length; i++) {
+          var li = document.createElement("li");
+          li.appendChild(document.createTextNode(registrationMessages[i]));
+          ul.appendChild(li);
+        }
+
+        var messageContainer = document.getElementById('message-container');
+        messageContainer.style.display = 'block';
+      }
+
+      // Function to check if the current time is within the specified period
+      function isWithinTimePeriod() {
+        var currentDate = new Date();
+        var currentHour = currentDate.getHours();
+        // Check if the current hour is between 10 AM of the current day and 10 AM of the next day
+        return (currentHour >= 10 || currentHour < 10);
+      }
+
+      // Function to load new messages every 10 seconds and check if they should be displayed
+      function checkForNewMessages() {
+        setInterval(function () {
+          if (isWithinTimePeriod()) {
+            loadNewData();
+          }
+        }, 10000); // 10 seconds interval
+      }
+
+      // Initial check for new messages
+      checkForNewMessages();
+    });
+
+    function loadNewData() {
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          document.getElementById("newData").innerHTML = this.responseText;
+          // Check if there is a new message and play notification sound
+          var newMessage = this.responseText.trim(); // Assuming the responseText contains the message directly
+          if (newMessage) {
+            var audio = new Audio('جرس.mp3'); // تأكد من وجود الملف الصوتي جرس.mp3 في نفس المجلد
+            audio.play();
+          }
+        }
+      };
+      xhttp.open("GET", "new_data.php", true);
+      xhttp.send();
+    }
+
+    // Function to save message for the current day starting from 10 AM
+    function saveMessageForDay(workerId) {
+      var message = document.getElementById("tasksTextArea" + workerId).value;
+      var currentDate = new Date();
+      var currentHour = currentDate.getHours();
+      var messageDate = new Date(currentDate); // Make a copy of the current date
+
+      // Check if the current hour is before 10 AM
+      if (currentHour < 10) {
+        // Set the message date to the previous day
+        messageDate.setDate(currentDate.getDate() - 1);
+      }
+
+      // Set the message date to 10 AM
+      messageDate.setHours(10);
+      messageDate.setMinutes(0);
+      messageDate.setSeconds(0);
+      messageDate.setMilliseconds(0);
+
+      // Save the message
+      var dateString = messageDate.toDateString(); // Get the date string
+      localStorage.setItem(dateString + "_worker" + workerId, message);
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      // تحديث الصفحة كل دقيقة
+
+      setInterval(function () {
+        location.reload();
+      }, 60000); // 60000 ميلي ثانية = دقيقة واحدة
+    });
+    addEventListener("storage", (event) => {
+      location.reload();
+    });
+    function saveTasksAndMessage(workerNumber) {
+      // حفظ المهام في Local Storage
+      var tasks = document.getElementById('tasksTextArea' + workerNumber).value;
+      localStorage.setItem('tasks' + workerNumber, tasks);
+      sessionStorage.setItem("Hamza task ", tasks)
+
+      // إرسال الرسالة
+      var messageInput = document.getElementById('messageInput' + workerNumber);
+      var message = messageInput.value;
+      // ارسل الرسالة هنا بالطريقة التي تفضلها
+      alert('تم إرسال الرسالة: ' + message);
+      // يمكنك استبدال الـ alert بكود يقوم بإرسال الرسالة إلى المكان المناسب
+    }
+
+    function showTasks(workerNumber) {
+      // إخفاء جميع مناطق المهام أولاً
+      for (var i = 1; i <= 3; i++) {
+        document.getElementById('task' + i).style.display = 'none';
+      }
+
+      // إظهار منطقة المهام المناسبة بناءً على رقم العامل
+      document.getElementById('task' + workerNumber).style.display = 'block';
+    }
+
+    function saveTasksAndMessage(workerNumber) {
+      // حفظ المهام في Local Storage
+      var tasks = document.getElementById('tasksTextArea' + workerNumber).value;
+      localStorage.setItem('tasks' + workerNumber, tasks);
+
+      // إرسال الرسالة
+      var messageInput = document.getElementById('messageInput' + workerNumber);
+      var message = messageInput.value;
+
+      // عرض الرسالة في الصفحة
+      var messageContainer = document.getElementById('message-container');
+      var messageParagraph = document.getElementById('registrationMessage');
+      messageParagraph.textContent = message;
+      messageContainer.style.display = 'block';
+
+      var audio = new Audio('جرس.mp3');
+      window.addEventListener('load', function() {
+            audio.play();
+        });
+    }
+
+    function clearLocalStorageAtEndOfDay() {
+      // Get current date
+      var now = new Date();
+
+      // Set the time to 00:00:00 for comparison
+      now.setHours(0, 0, 0, 0);
+
+      // Get the end of the day
+      var endOfDay = new Date(now);
+      endOfDay.setHours(23, 59, 59, 999);
+
+      // If it's the end of the day, clear local storage
+      if (now.getTime() === endOfDay.getTime()) {
+        localStorage.clear();
+      }
+    }
+
+    // Call the function every 1 minute
+    setInterval(clearLocalStorageAtEndOfDay, 60000); // 60000 milliseconds = 1 minute
+
+
+  </script>
+
+
+
+
+</body>
+
+</html>
